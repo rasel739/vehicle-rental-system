@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 const createUser = async (payload: IUser) => {
   const { name, email, password, role, phone } = payload;
 
-  const hashPassword = await bcrypt.hash(password as string, config.bycrypt_salt_round);
+  const hashPassword = await bcrypt.hash(password as string, Number(config.bycrypt_salt_round));
 
   let roles = role || 'customar';
 
