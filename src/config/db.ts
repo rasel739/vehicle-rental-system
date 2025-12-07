@@ -19,17 +19,16 @@ const dbSchema = async () => {
       `);
 
   await pool.query(`
-
-      CREATE TABLE IF NOT EXISTS vehicles(
-      id SERIAL PRIMARY KEY,
-      vehicle_name VARCHAR(200) NOT NULL,
-      type vehicles_type NOT NULL,
-      registration_number VARCHAR(50) UNIQUE NOT NULL,
-      daily_rant_price NUMERIC(10,2) NOT NULL,
-      availability_status VARCHAR(50) NOT NULL,
-      created_at TIMESTAMP DEFAULT NOW(),
-      updated_at TIMESTAMP DEFAULT NOW()
-      )
+    CREATE TABLE IF NOT EXISTS vehicles(
+    id SERIAL PRIMARY KEY,
+    vehicle_name VARCHAR(200) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    registration_number VARCHAR(50) UNIQUE NOT NULL,
+    daily_rent_price NUMERIC(10,2) NOT NULL,
+    availability_status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+    )
       `);
 
   await pool.query(`
