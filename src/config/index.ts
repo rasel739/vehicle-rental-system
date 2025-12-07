@@ -10,7 +10,7 @@ const config = {
   bycrypt_salt_round: process.env.BYCRYPT_SALT_ROUND || 10,
   jwt: {
     secret: process.env.JWT_SECRET || 'demo739',
-    expires_in: process.env.JWT_EXPIRES_IN || '7d',
+    expires_in: process.env.JWT_EXPIRES_IN || "7d",
   },
 };
 
