@@ -9,7 +9,7 @@ router.get('/', auth(ENUM_USER_ROLE.ADMIN), UserController.getUsers);
 
 router.put(
   '/:userId',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMAR),
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER),
   UserController.updateUser
 );
 router.delete('/:userId', auth(ENUM_USER_ROLE.ADMIN), UserController.deleteUser);

@@ -54,7 +54,7 @@ const loginUser = async (payload: ILogin) => {
     role: user.role,
   };
 
-  return { token, user: userData };
+  return { token: `Bearer ${token}`, user: userData };
 };
 
 export const AuthService = {
