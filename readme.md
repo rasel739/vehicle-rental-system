@@ -7,9 +7,10 @@ A robust RESTful API for managing vehicle rentals built with Node.js, Express, T
 - **User Authentication & Authorization**: Secure JWT-based authentication with role-based access control (Admin & Customer)
 - **Vehicle Management**: Complete CRUD operations for vehicle inventory
 - **User Management**: Admin capabilities to manage users and their roles
+- **Booking System**: Full booking management with automatic price calculation and status tracking
 - **Database Integration**: PostgreSQL with automated schema creation
 - **Type Safety**: Full TypeScript implementation for enhanced development experience
-- **Security**: Password hashing with bcrypt and protected routes
+- **Security**: Password hashing with bcrypt and Bearer token authentication
 
 ## Tech Stack
 
@@ -32,7 +33,7 @@ A robust RESTful API for managing vehicle rentals built with Node.js, Express, T
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/rasel739/vehicle-rental-system.git
+git clone <repository-url>
 cd vehicle-rental-system
 ```
 
@@ -94,9 +95,9 @@ POST /api/v1/auth/signup
 Content-Type: application/json
 
 {
-  "name": "Kamrul Islam",
-  "email": "kamrul@islam.com",
-  "password": "123456",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securePassword123",
   "phone": "+1234567890",
   "role": "customar"
 }
@@ -109,8 +110,8 @@ POST /api/v1/auth/signin
 Content-Type: application/json
 
 {
-  "email": "kamrul@islam.com",
-  "password": "123456"
+  "email": "john@example.com",
+  "password": "securePassword123"
 }
 ```
 
@@ -124,8 +125,8 @@ Content-Type: application/json
     "token": "jwt_token_here",
     "user": {
       "id": 1,
-      "name": "Kamrul Islam",
-      "email": "Kamrul Islam",
+      "name": "John Doe",
+      "email": "john@example.com",
       "phone": "+1234567890",
       "role": "customar"
     }
@@ -261,8 +262,8 @@ updated_at TIMESTAMP DEFAULT NOW()
 
 ## User Roles
 
-- **admin**: Full access to all endpoints, can manage vehicles and users
-- **customar**: Can view vehicles, update own profile
+- **admin**: Full access to all endpoints, can manage vehicles, users, and all bookings. Can mark bookings as returned.
+- **customer**: Can view vehicles, create bookings, view own bookings, update own profile, and cancel own bookings.
 
 ## Error Handling
 
@@ -295,8 +296,21 @@ vehicle-rental-system/
 │   │   │   └── auth.ts
 │   │   └── modules/
 │   │       ├── auth/
+│   │       │   ├── auth.controller.ts
+│   │       │   ├── auth.route.ts
+│   │       │   └── auth.service.ts
+│   │       ├── booking/
+│   │       │   ├── booking.controller.ts
+│   │       │   ├── booking.route.ts
+│   │       │   └── booking.service.ts
 │   │       ├── user/
+│   │       │   ├── user.controller.ts
+│   │       │   ├── user.route.ts
+│   │       │   └── user.service.ts
 │   │       └── vehicle/
+│   │           ├── vehicle.controller.ts
+│   │           ├── vehicle.route.ts
+│   │           └── vehicle.service.ts
 │   ├── config/
 │   │   ├── index.ts
 │   │   └── db.ts
@@ -304,6 +318,7 @@ vehicle-rental-system/
 │   │   └── index.ts
 │   ├── types/
 │   │   ├── db.ts
+│   │   ├── common.ts
 │   │   └── index.d.ts
 │   ├── app.ts
 │   └── server.ts
@@ -317,18 +332,12 @@ vehicle-rental-system/
 ## Security Features
 
 - Password hashing with bcrypt (configurable salt rounds)
-- JWT token-based authentication
-- Role-based access control
+- JWT Bearer token-based authentication
+- Role-based access control (RBAC)
 - Protected routes with middleware
+- Secure token validation
 - Environment variable configuration
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- SQL injection prevention with parameterized queries
 
 ## License
 
