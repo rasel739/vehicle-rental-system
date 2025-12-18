@@ -17,6 +17,10 @@ router.get(
   BookingsController.getBookings
 );
 
-router.put('/:bookingId', auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER));
+router.put(
+  '/:bookingId',
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.CUSTOMER),
+  BookingsController.updateBookings
+);
 
 export const BookingsRoutes = router;
